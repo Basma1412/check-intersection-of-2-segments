@@ -38,7 +38,7 @@ class line {
         double x=this.point_1.x_coord;
         double y=this.point_1.y_coord;
         double slope=this.slope();
-        double c =y/(x*slope);
+        double c =y-(x*slope);
         return c;
     }
     
