@@ -82,10 +82,67 @@ class line {
         return intersection;
     }
     
+    
+    
+    
+    
+    
+   
+    public boolean vertical()
+    {
+        if(this.point_1.x_coord==this.point_2.x_coord) 
+            return true;
+        return false;
+    }
+    
+    public boolean intersect_vertical(line l2)
+    {
+         double x_L1=this.point_1.x_coord;
+            
+            double x1_L2=l2.point_1.x_coord;
+            double x2_L2=l2.point_2.x_coord;
+            
+            if (((x1_L2<x_L1)&&(x2_L2>x_L1))||((x1_L2>x_L1)&&(x2_L2<x_L1)))
+            {
+                 double y1_L1=this.point_1.y_coord;
+                 double y2_L1=this.point_2.y_coord;
+            
+            double y1_L2=l2.point_1.y_coord;
+            double y2_L2=l2.point_2.y_coord;
+            
+           boolean c1=y1_L2<y1_L1;
+           boolean c2=y1_L2<y2_L1;
+           boolean c3=y1_L2>y1_L1;
+           boolean c4=y1_L2>y2_L1;
+           
+           
+           boolean c5=y2_L2<y1_L1;
+           boolean c6=y2_L2<y2_L1;
+           boolean c7=y2_L2>y1_L1;
+           boolean c8=y2_L2>y2_L1;
+           
+             return !((c1&&c2&&c5&&c6)||((c3&&c4&&c7&&c8)));
+    }
+            return false;
+    }
+    
     public boolean checkIntersection(line l2)
     {
         if (this.parallel(this, l2))return false ;
-        
+        if (this.vertical())
+        {
+            return intersect_vertical(l2);
+           
+        }
+        else if (l2.vertical())
+        {
+          
+            return l2.intersect_vertical(this);
+        }
+        else 
+        {
+                
+      
         double x_l1_p1=this.point_1.x_coord;
         double y_l1_p1=this.point_1.y_coord;
         
@@ -113,9 +170,12 @@ class line {
         boolean cond4=((intersection_y>y_l2_p1)&&(intersection_y>y_l2_p2))||((intersection_y<y_l2_p1)&&(intersection_y<y_l2_p2));
         
         return !(cond1||cond2||cond3||cond4);
+    } 
     }
     
 }
+
+
 
 public class JavaApplication20 {
 
